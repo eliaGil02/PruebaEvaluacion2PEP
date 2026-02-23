@@ -15,3 +15,4 @@ class DetalleTareaView(DetailView):
     model = Tarea  # modelo del q se obtendrá el objeto
     template_name = "tareas/detalle_tarea.html"  # plantilla que se usa
     context_object_name = "tarea"  # nombre que usamos en el HTML
+    ordering = ["-fecha_creacion"]  # ordenar por fecha de creacion descendente
