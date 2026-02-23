@@ -1,0 +1,17 @@
+# archivo para que git ignore ciertos archivos a la hora de subir
+
+# bd
+db.sqlite3
+
+# entorno virtual
+venv/
+
+# archivos temporales de python
+__pycache__/
+*.pyc
+
+# archivos temporales
+.env
+
+# archivos de entorno
+.env
