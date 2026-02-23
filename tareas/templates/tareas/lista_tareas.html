@@ -4,6 +4,13 @@
 
 <h2>Lista de tareas</h2>
 
+<!-- form de búsqueda -->
+<form method="get" class="busqueda">
+    <input type="text" name="tareaBuscar" placeholder="Buscar tarea..." value="{{ request.GET.tareaBuscar }}">
+    <button type="submit">Buscar</button>
+</form>
+
+
 {% if tareas %}
 
 <!-- si existen tareas, mostramos en un contenedor con secciones-->
