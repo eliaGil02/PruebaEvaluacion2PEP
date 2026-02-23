@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de tareas</title>
+</head>
+
+<body>
+    <h1>Lista de tareas</h1>
+
+    {% if tareas %}
+
+    <!-- si existen tareas, mostramos en una lista -->
+    <ul>
+
+        {% for tarea in tareas %}
+
+        <li>
+            <!-- datos del modelo Tarea -->
+            <strong>{{ tarea.titulo }}</strong><br>
+            {{ tarea.descripcion }}
+        </li>
+
+        {% endfor %}
+
+    </ul>
+
+    {% else %}
+
+    <!-- msj si no hay tareas -->
+    <p>No hay tareas creadas.</p>
+
+    {% endif %}
+</body>
+
+</html>
