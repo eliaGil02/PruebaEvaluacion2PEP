@@ -1,0 +1,29 @@
+{% extends "tareas/base.html" %}
+
+{% block contenido %}
+
+<!-- titulo de la tarea -->
+<h2>{{ tarea.titulo }}</h2>
+
+<!-- descripcion de la tarea -->
+<p>{{ tarea.descripcion }}</p>
+
+<hr>
+
+<!-- info adicional -->
+<p>
+    <strong>Fecha de creación:</strong> {{ tarea.fecha_creacion }}
+</p>
+
+<p>
+    <strong>Autor:</strong> {{ tarea.autor }}
+</p>
+
+<hr>
+
+<!-- enlace para volver a la lista -->
+<a href="{% url 'lista_tareas' %}">
+    Volver a la lista de tareas
+</a>
+
+{% endblock %}

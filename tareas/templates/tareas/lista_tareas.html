@@ -1,38 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "tareas/base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de tareas</title>
-</head>
+{% block contenido %}
 
-<body>
-    <h1>Lista de tareas</h1>
+<h2>Lista de tareas</h2>
 
-    {% if tareas %}
+{% if tareas %}
 
-    <!-- si existen tareas, mostramos en una lista -->
-    <ul>
+<!-- si existen tareas, mostramos en una lista -->
+<ul>
 
-        {% for tarea in tareas %}
+    {% for tarea in tareas %}
 
-        <li>
-            <!-- datos del modelo Tarea -->
-            <strong>{{ tarea.titulo }}</strong><br>
-            {{ tarea.descripcion }}
-        </li>
+    <li>
+        <!-- enlace al detalle de la tarea -->
+        <strong>
+            <a href="{% url 'detalle_tarea' tarea.pk %}">
+                {{ tarea.titulo }}
+            </a>
+        </strong>
+        <br>
 
-        {% endfor %}
+        <!-- descripcion de la tarea -->
+        {{ tarea.descripcion }}
+    </li>
 
-    </ul>
+    {% endfor %}
 
-    {% else %}
+</ul>
 
-    <!-- msj si no hay tareas -->
-    <p>No hay tareas creadas.</p>
+{% else %}
 
-    {% endif %}
-</body>
+<!-- msj si no hay tareas -->
+<p>No hay tareas creadas.</p>
 
-</html>
+{% endif %}
+
+{% endblock %}
