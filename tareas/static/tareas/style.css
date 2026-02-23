@@ -19,25 +19,6 @@ main {
     padding: 20px;
 }
 
-/* listas */
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
-    background: white;
-    margin-bottom: 15px;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease;
-}
-
-li:hover {
-    transform: translateY(-3px);
-}
-
 /* enlaces */
 a {
     text-decoration: none;
@@ -58,9 +39,32 @@ footer {
     font-size: 14px;
 }
 
-/* linea superior del footer */
-footer hr {
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    margin-bottom: 10px;
+/* contenedor de tareas */
+.contenedor-tareas {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* tarjeta individual de tarea */
+.tarea {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
+}
+
+.tarea:hover {
+    transform: translateY(-3px);
+}
+
+/* título dentro de tarjeta */
+.tarea h3 {
+    margin-top: 0;
+}
+
+/* texto pequeño */
+.tarea small {
+    color: #666;
 }

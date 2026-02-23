@@ -6,27 +6,29 @@
 
 {% if tareas %}
 
-<!-- si existen tareas, mostramos en una lista -->
-<ul>
-
+<!-- si existen tareas, mostramos en un contenedor con secciones-->
+<div class="contenedor-tareas">
     {% for tarea in tareas %}
 
-    <li>
+    <section class="tarea">
         <!-- enlace al detalle de la tarea -->
-        <strong>
+        <h3>
             <a href="{% url 'detalle_tarea' tarea.pk %}">
                 {{ tarea.titulo }}
             </a>
-        </strong>
-        <br>
+        </h3>
 
         <!-- descripcion de la tarea -->
-        {{ tarea.descripcion }}
-    </li>
+        <p>{{ tarea.descripcion }}</p>
+
+        <small>
+            Creada el {{ tarea.fecha_creacion|date:"d/m/Y H:i" }}
+        </small>
+
+    </section>
 
     {% endfor %}
-
-</ul>
+</div>
 
 {% else %}
 
