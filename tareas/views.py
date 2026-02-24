@@ -1,5 +1,8 @@
 from .models import Tarea
 from django.views.generic import ListView, DetailView
+from django.views.generic import CreateView
+from django.urls import reverse_lazy # reverse_lazy se usa para redirecciones después de enviar un formulario
+from django.contrib.auth.mixins import LoginRequiredMixin # Mixin que obliga a estar autenticado
 
 # Create your views here.
 
@@ -28,3 +31,14 @@ class DetalleTareaView(DetailView):
     model = Tarea  # modelo del q se obtendrá el objeto
     template_name = "tareas/detalle_tarea.html"  # plantilla que se usa
     context_object_name = "tarea"  # nombre que usamos en el HTML
+
+class CrearTareaView(LoginRequiredMixin, CreateView):# Vista basada en clase para crear nuevas tareas   
+    model = Tarea
+    template_name = "tareas/crear_tarea.html"
+    fields = ["titulo", "descripcion", "estado"]
+    success_url = reverse_lazy("lista_tareas")# Redirección tras guardar
+
+    # Asignamos automáticamente el usuario logueado como autor
+    def form_valid(self, form):
+        form.instance.autor = self.request.user
+        return super().form_valid(form)
