@@ -88,3 +88,53 @@ footer {
     border-radius: 4px;
     cursor: pointer;
 }
+
+/* navbar */
+nav {
+    background: white;
+    padding: 18px 60px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* contenedor interno */
+.nav-contenido {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* user */
+.usuario {
+    background-color: #2563eb;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* links */
+nav a {
+    color: #374151;
+    font-weight: 500;
+    text-decoration: none;
+    position: relative;
+    padding: 5px 0;
+}
+
+/* logout */
+nav form button {
+    background-color: transparent;
+    color: red;
+    border: 1px solid red;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+nav form button:hover {
+    background-color: red;
+    color: white;
+}

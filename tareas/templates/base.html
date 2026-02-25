@@ -15,29 +15,29 @@
         <hr>
     </header>
     <nav>
-        <a href="{% url 'lista_tareas' %}">Inicio</a>
-
         {% if user.is_authenticated %}
-        <span>Hola {{ user.username }}</span>
-        <a href="{% url 'crear_tarea' %}">Añadir tarea</a>
+        <div class="nav-contenido">
+            <span class="usuario">¡Hola {{ user.username }}!</span>
+            <a href="{% url 'lista_tareas' %}">Inicio</a>
+            <a href="{% url 'crear_tarea' %}">Añadir tarea</a>
 
-        <form action="{% url 'logout' %}" method="post" style="display:inline;">
-            {% csrf_token %}
-            <button type="submit">
-                Cerrar sesión
-            </button>
-        </form>
-
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">
+                    Cerrar sesión
+                </button>
+            </form>
+        </div>
         {% else %}
+        <div class="nav-contenido">
+            {% if request.resolver_match.url_name != "login" %}
+            <a href="{% url 'login' %}">Login</a>
+            {% endif %}
 
-        {% if request.resolver_match.url_name != "login" %}
-        <a href="{% url 'login' %}">Login</a>
-        {% endif %}
-
-        {% if request.resolver_match.url_name != "signup" %}
-        <a href="{% url 'signup' %}">Registrarse</a>
-        {% endif %}
-
+            {% if request.resolver_match.url_name != "signup" %}
+            <a href="{% url 'signup' %}">Registrarse</a>
+            {% endif %}
+        </div>
         {% endif %}
     </nav>
     <main>
