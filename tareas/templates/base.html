@@ -17,16 +17,25 @@
     <nav>
         {% if user.is_authenticated %}
         <div class="nav-contenido">
-            <span class="usuario">¡Hola {{ user.username }}!</span>
-            <a href="{% url 'lista_tareas' %}">Inicio</a>
-            <a href="{% url 'crear_tarea' %}">Añadir tarea</a>
+            <div class="nav-izquierda">
+                <span class="usuario">¡Hola {{ user.username }}!</span>
+                {% if request.resolver_match.url_name != "lista_tareas" %}
+                <a href="{% url 'lista_tareas' %}">Inicio</a>
+                {% endif %}
 
-            <form action="{% url 'logout' %}" method="post" style="display:inline;">
-                {% csrf_token %}
-                <button type="submit">
-                    Cerrar sesión
-                </button>
-            </form>
+                {% if request.resolver_match.url_name != "crear_tarea" %}
+                <a href="{% url 'crear_tarea' %}">Añadir tarea</a>
+                {% endif %}
+            </div>
+
+            <div class="nav-derecha">
+                <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">
+                        Cerrar sesión
+                    </button>
+                </form>
+            </div>
         </div>
         {% else %}
         <div class="nav-contenido">

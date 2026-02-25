@@ -99,8 +99,19 @@ nav {
 /* contenedor interno */
 .nav-contenido {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 20px;
+}
+
+.nav-izquierda {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-derecha {
+    display: flex;
 }
 
 /* user */
