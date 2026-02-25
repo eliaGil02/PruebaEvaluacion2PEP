@@ -100,7 +100,7 @@ class CrearTareaView(
         return super().form_valid(form)
 
 
-class EliminarTareaView(LoginRequiredMixin, PermisoAutorAdmin):
+class EliminarTareaView( LoginRequiredMixin, PermisoAutorAdmin, DeleteView,):
     # vista para eliminar una tarea
     model = Tarea
     template_name = "tareas/eliminar_tarea.html"

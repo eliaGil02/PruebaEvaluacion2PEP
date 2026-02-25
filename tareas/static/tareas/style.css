@@ -149,3 +149,65 @@ nav form button:hover {
     background-color: red;
     color: white;
 }
+
+/* para aplicar estilo en estados */
+.estado {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: white;
+}
+
+.estado.pendiente {
+    background-color: #f39c12;
+}
+
+.estado.proceso {
+    background-color: #3498db;
+}
+
+.estado.completada {
+    background-color: #27ae60;
+}
+
+/* estilos en botones*/
+.form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+.acciones-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn-principal {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-principal:hover {
+    background-color: #1a252f;
+}
+
+.btn-secundario {
+    background-color: #bdc3c7;
+    color: black;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-secundario:hover {
+    background-color: #95a5a6;
+}

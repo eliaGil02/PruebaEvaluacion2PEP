@@ -27,7 +27,9 @@
         </h3>
 
         <!-- descripcion de la tarea -->
-        <p>{{ tarea.descripcion }}</p>
+        <p>{{ tarea.descripcion }}</p> <!--LA descripcion--> 
+        <p><strong>Estado:</strong> <span class="estado {{ tarea.estado }}">{{ tarea.get_estado_display }}
+        </span></p><!--en estado que se encuentraa--> 
 
         <small>
             Creada el {{ tarea.fecha_creacion|date:"d/m/Y H:i" }}
