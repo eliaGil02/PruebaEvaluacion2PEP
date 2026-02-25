@@ -1,14 +1,50 @@
 from .models import Tarea
-from django.views.generic import ListView, DetailView, CreateView, DeleteView
+
+# vistas genericas
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    DeleteView,
+    UpdateView,
+)
+
+# reverse_lazy se usa para redirecciones después de enviar un formulario
 from django.urls import (
     reverse_lazy,
-)  # reverse_lazy se usa para redirecciones después de enviar un formulario
-from django.contrib.auth.mixins import (
-    LoginRequiredMixin,
-)  # Mixin que obliga a estar autenticado
+)
+
+# Mixin que obliga a estar autenticado
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
+# form de registro de users
 from django.contrib.auth.forms import UserCreationForm
 
+# framework de msj
+from django.contrib import messages
+
+# para redireccionar
+from django.shortcuts import redirect
+
 # Create your views here.
+
+
+class PermisoAutorAdmin(UserPassesTestMixin):
+    # permite el acceso solo si el user es el autor o es un superusuario
+    def test_func(self):
+        objeto = self.get_object()
+
+        if self.request.user == objeto.autor:
+            return True
+
+        if self.request.user.is_staff or self.request.user.is_superuser:
+            return True
+
+        return False
+
+    def handle_no_permission(self):
+        messages.error(self.request, "No tienes permiso para realizar esta acción.")
+        return redirect("lista_tareas")
 
 
 class ListaTareasView(LoginRequiredMixin, ListView):
@@ -20,9 +56,13 @@ class ListaTareasView(LoginRequiredMixin, ListView):
 
     # sobreescribimos el metodo q obtiene los datos, q permite modificar la lista de tareas antes de enviarla
     def get_queryset(self):
-        queryset = Tarea.objects.filter(
-            autor=self.request.user
-        )  # obtenemos todas las tareas de el usuario
+        # si es superusuario puede ver todas las tareas
+        if self.request.user.is_staff or self.request.user.is_superuser:
+            queryset = Tarea.objects.all()
+        else:
+            queryset = Tarea.objects.filter(
+                autor=self.request.user
+            )  # obtenemos todas las tareas de el usuario
         busqueda = self.request.GET.get(
             "tareaBuscar"
         )  # recogemos lo q el usuario escribe en el buscador
@@ -41,6 +81,8 @@ class DetalleTareaView(LoginRequiredMixin, DetailView):
 
     # limitar queryset para evitar q un user pueda ver tareas q no le corresponden
     def get_queryset(self):
+        if self.request.user.is_staff or self.request.user.is_superuser:
+            return Tarea.objects.all()
         return Tarea.objects.filter(autor=self.request.user)
 
 
@@ -58,15 +100,11 @@ class CrearTareaView(
         return super().form_valid(form)
 
 
-class EliminarTareaView(LoginRequiredMixin, DeleteView):
+class EliminarTareaView(LoginRequiredMixin, PermisoAutorAdmin):
     # vista para eliminar una tarea
     model = Tarea
     template_name = "tareas/eliminar_tarea.html"
     success_url = reverse_lazy("lista_tareas")
-
-    # limitar queryset para evitar q un user elimine tareas q no le corresponden
-    def get_queryset(self):
-        return Tarea.objects.filter(autor=self.request.user)
 
 
 class RegistrarseView(CreateView):
@@ -74,3 +112,11 @@ class RegistrarseView(CreateView):
     form_class = UserCreationForm
     template_name = "registration/signup.html"
     success_url = reverse_lazy("login")
+
+
+class EditarTareaView(LoginRequiredMixin, PermisoAutorAdmin, UpdateView):
+    # vista para modificar una tarea ya hecha
+    model = Tarea
+    template_name = "tareas/editar_tarea.html"
+    fields = ["titulo", "descripcion", "estado"]
+    success_url = reverse_lazy("lista_tareas")  # Redirección tras guardar
