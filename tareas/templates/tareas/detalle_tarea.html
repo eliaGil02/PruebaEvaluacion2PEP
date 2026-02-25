@@ -1,4 +1,6 @@
-{% extends "tareas/base.html" %}
+{% extends "base.html" %}
+
+{% block title %}Detalle tarea{% endblock %}
 
 {% block contenido %}
 
@@ -15,12 +17,13 @@
     <strong>Fecha de creación:</strong> {{ tarea.fecha_creacion|date:"d/m/Y H:i" }}
 </p>
 
-<p>
-    <strong>Autor:</strong> {{ tarea.autor }}
-</p>
-
 <hr>
 
+{% if user == tarea.autor %}
+<a href="{% url 'eliminar_tarea' tarea.pk %}">Eliminar tarea</a>
+{% endif %}
+
+<br><br>
 <!-- enlace para volver a la lista -->
 <a href="{% url 'lista_tareas' %}">
     Volver a la lista de tareas

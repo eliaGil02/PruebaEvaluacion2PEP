@@ -5,8 +5,8 @@ Rutas específicas de esta app
 """
 
 from django.urls import path
-from .views import ListaTareasView, DetalleTareaView
-from .views import CrearTareaView #+importamos la clase desde tarea/view.py
+from .views import ListaTareasView, DetalleTareaView, RegistrarseView
+from .views import CrearTareaView  # +importamos la clase desde tarea/view.py
 
 urlpatterns = [
     # ruta principal que muestra la lista de tareas
@@ -15,4 +15,6 @@ urlpatterns = [
     path("tarea/<int:pk>/", DetalleTareaView.as_view(), name="detalle_tarea"),
     # Ruta para crear una nueva tarea
     path("crear/", CrearTareaView.as_view(), name="crear_tarea"),
+    # ruta para registrarse
+    path("signup/", RegistrarseView.as_view(), name="signup"),
 ]

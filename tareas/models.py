@@ -10,11 +10,21 @@ class Tarea(models.Model):
     Cada tarea tiene: título, descripcion, fecha automática y autor
     """
 
+    ESTADO_CHOICES = [
+        ("pendiente", "Pendiente"),
+        ("proceso", "En proceso"),
+        ("completada", "Completada"),
+    ]
+
     titulo = models.CharField(max_length=100)
 
     descripcion = models.TextField()
 
     fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+    estado = models.CharField(
+        max_length=20, choices=ESTADO_CHOICES, default="pendiente"
+    )
 
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
 

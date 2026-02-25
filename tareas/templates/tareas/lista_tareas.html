@@ -1,4 +1,6 @@
-{% extends "tareas/base.html" %}
+{% extends "base.html" %}
+
+{% block title %}Lista de tareas{% endblock %}
 
 {% block contenido %}
 
@@ -9,11 +11,6 @@
     <input type="text" name="tareaBuscar" placeholder="Buscar tarea..." value="{{ request.GET.tareaBuscar }}">
     <button type="submit">Buscar</button>
 </form>
-
-{% if user.is_authenticated %}
-    <a href="{% url 'crear_tarea' %}"> Nueva tarea</a>
-{% endif %}
-
 
 {% if tareas %}
 
@@ -43,8 +40,11 @@
 
 {% else %}
 
-<!-- msj si no hay tareas -->
+{% if request.GET.tareaBuscar %}
+<p>No se encontraron tareas con ese criterio.</p>
+{% else %}
 <p>No hay tareas creadas.</p>
+{% endif %}
 
 {% endif %}
 

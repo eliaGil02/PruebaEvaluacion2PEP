@@ -117,3 +117,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+
+# redirige al login si no esta autenticado
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "lista_tareas"
+LOGOUT_REDIRECT_URL = "login"

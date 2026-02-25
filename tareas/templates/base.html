@@ -16,6 +16,29 @@
     </header>
     <nav>
         <a href="{% url 'lista_tareas' %}">Inicio</a>
+
+        {% if user.is_authenticated %}
+        <span>Hola {{ user.username }}</span>
+        <a href="{% url 'crear_tarea' %}">Añadir tarea</a>
+
+        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">
+                Cerrar sesión
+            </button>
+        </form>
+
+        {% else %}
+
+        {% if request.resolver_match.url_name != "login" %}
+        <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+
+        {% if request.resolver_match.url_name != "signup" %}
+        <a href="{% url 'signup' %}">Registrarse</a>
+        {% endif %}
+
+        {% endif %}
     </nav>
     <main>
         {% block contenido %}
