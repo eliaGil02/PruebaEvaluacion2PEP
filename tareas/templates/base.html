@@ -50,6 +50,16 @@
         {% endif %}
     </nav>
     <main>
+        {% if messages %}
+        <div class="contenedor-mensajes">
+            {% for message in messages %}
+            <div class="mensaje {{ message.tags }}">
+                <span>{{ message }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
         {% block contenido %}
         {% endblock %}
     </main>

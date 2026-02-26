@@ -113,6 +113,7 @@ class CrearTareaView(
     # Asignamos automáticamente el usuario logueado como autor
     def form_valid(self, form):
         form.instance.autor = self.request.user
+        messages.success(self.request, "Tarea creada correctamente.")
         return super().form_valid(form)
 
 
@@ -125,6 +126,10 @@ class EliminarTareaView(
     model = Tarea
     template_name = "tareas/eliminar_tarea.html"
     success_url = reverse_lazy("lista_tareas")
+
+    def form_valid(self, form):
+        messages.success(self.request, "Tarea eliminada correctamente.")
+        return super().form_valid(form)
 
 
 class RegistrarseView(CreateView):
@@ -140,3 +145,7 @@ class EditarTareaView(LoginRequiredMixin, PermisoAutorAdmin, UpdateView):
     template_name = "tareas/editar_tarea.html"
     fields = ["titulo", "descripcion", "estado"]
     success_url = reverse_lazy("lista_tareas")  # Redirección tras guardar
+
+    def form_valid(self, form):
+        messages.success(self.request, "Tarea actualizada correctamente.")
+        return super().form_valid(form)
