@@ -11,11 +11,11 @@
         {{ form.as_p }} <!-- Renderiza automáticamente los campos del formulario -->
 
         <div class="acciones-form"> <!-- Contenedor de botones -->
-            <button type="submit" class="btn-principal">
+            <button type="submit" class="btn btn-guardar">
                 Guardar <!-- Envía el formulario -->
             </button>
 
-            <a href="{% url 'lista_tareas' %}" class="btn-secundario">
+            <a href="{% url 'lista_tareas' %}" class="btn btn-cancelar">
                 Cancelar <!-- Vuelve a la lista sin guardar -->
             </a>
         </div>
@@ -23,4 +23,3 @@
 </div>
 
 {% endblock %}
-

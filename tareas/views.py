@@ -29,6 +29,9 @@ from django.shortcuts import redirect
 # importamos el form de registro que hemos hecho
 from .forms import RegistroForm
 
+# importamos las ayudas para ordenar la lista de tareas
+from django.db.models import Case, When, Value, IntegerField
+
 # Create your views here.
 
 
@@ -72,6 +75,16 @@ class ListaTareasView(LoginRequiredMixin, ListView):
         if busqueda:
             # filtramos las tareas q tenga el titulo con el texto buscado
             queryset = queryset.filter(titulo__icontains=busqueda)
+
+        # ordenar la lista de tareas por pendiente, en proceso y completado ypor fechas
+        queryset = queryset.annotate(
+            orden_estado=Case(
+                When(estado="pendiente", then=Value(1)),
+                When(estado="proceso", then=Value(2)),
+                When(estado="completada", then=Value(3)),
+                output_field=IntegerField(),
+            )
+        ).order_by("orden_estado", "-fecha_creacion")
 
         return queryset  # devolvemos la lista final
 

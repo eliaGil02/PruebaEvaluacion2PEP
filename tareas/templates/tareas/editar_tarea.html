@@ -4,13 +4,19 @@
 
 {% block contenido %}
 
-<h2>Editar tarea</h2>
+<div class="form-container">
+    <h2>Editar tarea</h2>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="acciones-form">
+            <button type="submit" class="btn btn-guardar">Guardar cambios</button>
+            <a href="{% url 'detalle_tarea' object.pk %}" class="btn btn-cancelar">
+                Cancelar
+            </a>
 
-    <button type="submit">Guardar cambios</button>
-</form>
-
+        </div>
+    </form>
+</div>
 {% endblock %}
