@@ -18,7 +18,7 @@
         {% if user.is_authenticated %}
         <div class="nav-contenido">
             <div class="nav-izquierda">
-                <span class="usuario">¡Hola {{ user.username }}!</span>
+                <span class="usuario">¡Hola {{ user.first_name }}!</span>
                 {% if request.resolver_match.url_name != "lista_tareas" %}
                 <a href="{% url 'lista_tareas' %}">Inicio</a>
                 {% endif %}

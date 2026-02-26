@@ -26,6 +26,9 @@ from django.contrib import messages
 # para redireccionar
 from django.shortcuts import redirect
 
+# importamos el form de registro que hemos hecho
+from .forms import RegistroForm
+
 # Create your views here.
 
 
@@ -100,7 +103,11 @@ class CrearTareaView(
         return super().form_valid(form)
 
 
-class EliminarTareaView( LoginRequiredMixin, PermisoAutorAdmin, DeleteView,):
+class EliminarTareaView(
+    LoginRequiredMixin,
+    PermisoAutorAdmin,
+    DeleteView,
+):
     # vista para eliminar una tarea
     model = Tarea
     template_name = "tareas/eliminar_tarea.html"
@@ -109,7 +116,7 @@ class EliminarTareaView( LoginRequiredMixin, PermisoAutorAdmin, DeleteView,):
 
 class RegistrarseView(CreateView):
     # vista para registrarse
-    form_class = UserCreationForm
+    form_class = RegistroForm
     template_name = "registration/signup.html"
     success_url = reverse_lazy("login")
 
