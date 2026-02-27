@@ -305,3 +305,17 @@ MENSAJES
     background-color: #f8d7da;
     color: darkred;
 }
+
+/*Estilo para la imagen*/
+.imagen-tarea {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin-top: 10px;
+}
+
+.tarea {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}

@@ -102,12 +102,10 @@ class DetalleTareaView(LoginRequiredMixin, DetailView):
         return Tarea.objects.filter(autor=self.request.user)
 
 
-class CrearTareaView(
-    LoginRequiredMixin, CreateView
-):  # Vista basada en clase para crear nuevas tareas
+class CrearTareaView(LoginRequiredMixin, CreateView):  # Vista basada en clase para crear nuevas tareas
     model = Tarea
     template_name = "tareas/crear_tarea.html"
-    fields = ["titulo", "descripcion", "estado"]
+    fields = ["titulo","imagen", "descripcion", "estado"]
     success_url = reverse_lazy("lista_tareas")  # Redirección tras guardar
 
     # Asignamos automáticamente el usuario logueado como autor
@@ -117,11 +115,7 @@ class CrearTareaView(
         return super().form_valid(form)
 
 
-class EliminarTareaView(
-    LoginRequiredMixin,
-    PermisoAutorAdmin,
-    DeleteView,
-):
+class EliminarTareaView(LoginRequiredMixin,PermisoAutorAdmin,DeleteView,):
     # vista para eliminar una tarea
     model = Tarea
     template_name = "tareas/eliminar_tarea.html"

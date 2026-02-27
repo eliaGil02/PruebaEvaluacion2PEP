@@ -16,7 +16,10 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from django.conf import settings #permite acceder a la conf del proyecto
 from django.urls import path, include
+from django.conf.urls.static import static # Función que permite servir archivos multimedia en desarrollo
+
 
 urlpatterns = [
     # ruta del panel de administracion
@@ -26,3 +29,7 @@ urlpatterns = [
     # ruta para el login/logout
     path("accounts/", include("django.contrib.auth.urls")),
 ]
+
+# Permite mostrar imágenes en desarrollo
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

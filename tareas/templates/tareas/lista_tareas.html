@@ -19,22 +19,26 @@
     {% for tarea in tareas %}
 
     <section class="tarea">
-        <!-- enlace al detalle de la tarea -->
-        <h3>
-            <a href="{% url 'detalle_tarea' tarea.pk %}">
-                {{ tarea.titulo }}
-            </a>
-        </h3>
+        <div>
+            <!-- enlace al detalle de la tarea -->
+            <h3>
+                <a href="{% url 'detalle_tarea' tarea.pk %}">
+                    {{ tarea.titulo }}
+                </a>
+            </h3>
+            <!-- descripcion de la tarea -->
+            <p class="descripcion-tarea">{{ tarea.descripcion }}</p> <!--LA descripcion-->
+            <p><span class="estado {{ tarea.estado }}">{{ tarea.get_estado_display }}
+                </span></p><!--en estado que se encuentraa-->
 
-        <!-- descripcion de la tarea -->
-        <p class="descripcion-tarea">{{ tarea.descripcion }}</p> <!--LA descripcion-->
-        <p><span class="estado {{ tarea.estado }}">{{ tarea.get_estado_display }}
-            </span></p><!--en estado que se encuentraa-->
+            <small>
+                Creada el {{ tarea.fecha_creacion|date:"d/m/Y H:i" }}
+            </small>
+        </div>
 
-        <small>
-            Creada el {{ tarea.fecha_creacion|date:"d/m/Y H:i" }}
-        </small>
-
+        {% if tarea.imagen %} <!-- La imagen si existe -->
+            <img src="{{ tarea.imagen.url }}" alt="Imagen de la tarea" class="imagen-tarea">
+        {% endif %}
     </section>
 
     {% endfor %}

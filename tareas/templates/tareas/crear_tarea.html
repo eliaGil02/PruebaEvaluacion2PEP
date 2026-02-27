@@ -5,7 +5,7 @@
 <div class="form-container"> <!-- Contenedor principal del formulario -->
     <h2>Crear nueva tarea</h2>
 
-    <form method="post"> <!-- Formulario para enviar datos -->
+    <form method="post" enctype="multipart/form-data"> <!-- Formulario para enviar datos de todo tipo -->
         {% csrf_token %} <!-- Token de seguridad obligatorio en POST -->
 
         {{ form.as_p }} <!-- Renderiza automáticamente los campos del formulario -->
