@@ -118,6 +118,10 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+# Configuración para archivos subidos por los usuarios (imágenes)
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 # redirige al login si no esta autenticado
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "lista_tareas"
